@@ -79,37 +79,62 @@ body {
 }
 
 /* Hero Section */
+/* Hero Section */
 .hero {
     background: linear-gradient(
         135deg,
-        var(--primary-color) 0%,
-        #153b7a 100%
+        #0A1F44 0%,
+        #153b7a 50%,
+        #1e4fa3 100%
     );
-    color: var(--white);
-    padding: 100px 0;
+    color: #ffffff;
+    padding: 120px 0;
     text-align: center;
 }
 
 .hero-content h2 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
 .hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+    font-size: 1.3rem;
+    color: #e2e8f0;
+    margin-bottom: 35px;
 }
 
-/* Buttons */
-.btn {
-    padding: 12px 25px;
-    border: none;
+.hero .btn {
+    background: #FF6B00;
+    color: #ffffff;
+    padding: 14px 35px;
     border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: 0.3s;
     font-size: 1rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(255,107,0,0.4);
+}
+
+.hero .btn:hover {
+    background: #e65c00;
+    transform: translateY(-3px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+
+    .hero {
+        padding: 80px 20px;
+    }
+
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
 }
 
 .btn-primary,
