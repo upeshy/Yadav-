@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yadav - E-Commerce Store</title>
+    <title>PRINTiZY - Custom T-Shirt Printing</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="navbar-brand">
-                <h1>🛍️ Yadav Store</h1>
+                <h1>👕 PRINTiZY</h1>
             </div>
+
             <ul class="nav-links">
                 <li><a href="/" class="active">Home</a></li>
-                <li><a href="/products">Products</a></li>
-                <li><a href="/cart">🛒 Cart <span id="cart-count" class="badge">0</span></a></li>
+                <li><a href="/products">T-Shirts</a></li>
+                <li>
+                    <a href="/cart">
+                        🛒 Cart
+                        <span id="cart-count" class="badge">0</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -25,9 +32,11 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h2>Welcome to Yadav Store</h2>
-                <p>Your one-stop shop for quality products at unbeatable prices</p>
-                <a href="/products" class="btn btn-primary">Shop Now</a>
+                <h2>Custom T-Shirt Printing Made Easy</h2>
+                <p>Design your own T-Shirts with premium quality printing.</p>
+                <a href="/products" class="btn btn-primary">
+                    Explore T-Shirts
+                </a>
             </div>
         </div>
     </section>
@@ -35,7 +44,7 @@
     <!-- Featured Products -->
     <section class="featured-products">
         <div class="container">
-            <h2>Featured Products</h2>
+            <h2>Featured T-Shirts</h2>
             <div id="featured-grid" class="products-grid"></div>
         </div>
     </section>
@@ -43,28 +52,34 @@
     <!-- Why Choose Us -->
     <section class="why-choose-us">
         <div class="container">
-            <h2>Why Choose Yadav Store?</h2>
+            <h2>Why Choose PRINTiZY?</h2>
+
             <div class="features-grid">
+
                 <div class="feature-card">
-                    <div class="feature-icon">✓</div>
-                    <h3>Best Prices</h3>
-                    <p>Competitive prices on all products</p>
+                    <div class="feature-icon">🎨</div>
+                    <h3>Custom Designs</h3>
+                    <p>Create personalized T-Shirts with your own designs.</p>
                 </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">👕</div>
+                    <h3>Premium Fabric</h3>
+                    <p>High-quality cotton T-Shirts with durable prints.</p>
+                </div>
+
                 <div class="feature-card">
                     <div class="feature-icon">🚚</div>
-                    <h3>Fast Shipping</h3>
-                    <p>Delivery in 5-7 business days</p>
+                    <h3>Fast Delivery</h3>
+                    <p>Quick shipping across India.</p>
                 </div>
+
                 <div class="feature-card">
                     <div class="feature-icon">🔒</div>
                     <h3>Secure Payment</h3>
-                    <p>100% secure checkout process</p>
+                    <p>100% safe and secure checkout process.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💬</div>
-                    <h3>24/7 Support</h3>
-                    <p>Customer support always available</p>
-                </div>
+
             </div>
         </div>
     </section>
@@ -72,28 +87,38 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+
             <div class="footer-content">
+
                 <div class="footer-section">
                     <h3>About Us</h3>
-                    <p>Yadav Store is your trusted online marketplace for quality products.</p>
+                    <p>
+                        PRINTiZY is your trusted destination for custom
+                        printed T-Shirts and apparel.
+                    </p>
                 </div>
+
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/products">Products</a></li>
+                        <li><a href="/products">T-Shirts</a></li>
                         <li><a href="/cart">Cart</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-section">
                     <h3>Contact</h3>
-                    <p>Email: info@yadavstore.com</p>
-                    <p>Phone: +91-XXXX-XXXX-XXXX</p>
+                    <p>Email: support@printizy.com</p>
+                    <p>Phone: +91-9473649700</p>
                 </div>
+
             </div>
+
             <div class="footer-bottom">
-                <p>&copy; 2026 Yadav Store. All rights reserved.</p>
+                <p>&copy; 2026 PRINTiZY. All rights reserved.</p>
             </div>
+
         </div>
     </footer>
 
@@ -104,8 +129,9 @@
                 const response = await fetch('/api/products');
                 const products = await response.json();
                 const featured = products.slice(0, 3);
-                
+
                 const grid = document.getElementById('featured-grid');
+
                 grid.innerHTML = featured.map(product => `
                     <div class="product-card">
                         <img src="${product.image}" alt="${product.name}">
@@ -113,35 +139,59 @@
                         <p class="category">${product.category}</p>
                         <p class="price">₹${product.price.toLocaleString('en-IN')}</p>
                         <p class="description">${product.description}</p>
-                        <button class="btn btn-secondary" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Add to Cart</button>
+                        <button class="btn btn-secondary"
+                        onclick="addToCart(${product.id}, '${product.name}', ${product.price})">
+                        Add to Cart
+                        </button>
                     </div>
                 `).join('');
+
             } catch (error) {
                 console.error('Error loading products:', error);
-                document.getElementById('featured-grid').innerHTML = '<p>Failed to load products</p>';
+
+                document.getElementById('featured-grid').innerHTML =
+                    '<p>Failed to load products</p>';
             }
         }
 
         // Add to cart function
         function addToCart(productId, productName, price) {
+
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            
-            const existingItem = cart.find(item => item.id === productId);
+
+            const existingItem = cart.find(
+                item => item.id === productId
+            );
+
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
-                cart.push({ id: productId, name: productName, price: price, quantity: 1 });
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: price,
+                    quantity: 1
+                });
             }
-            
+
             localStorage.setItem('cart', JSON.stringify(cart));
+
             updateCartCount();
+
             alert(productName + ' added to cart!');
         }
 
         // Update cart count
         function updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const count = cart.reduce((total, item) => total + item.quantity, 0);
+
+            const cart =
+                JSON.parse(localStorage.getItem('cart')) || [];
+
+            const count = cart.reduce(
+                (total, item) => total + item.quantity,
+                0
+            );
+
             document.getElementById('cart-count').textContent = count;
         }
 
@@ -150,6 +200,8 @@
             loadFeaturedProducts();
             updateCartCount();
         });
+
     </script>
+
 </body>
 </html>
