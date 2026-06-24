@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products - Yadav Store</title>
+    <title>Custom T-Shirts - PRINTiZY</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="navbar-brand">
-                <h1>🛍️ Yadav Store</h1>
+                <h1>👕 PRINTiZY</h1>
             </div>
+
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
-                <li><a href="/products" class="active">Products</a></li>
-                <li><a href="/cart">🛒 Cart <span id="cart-count" class="badge">0</span></a></li>
+                <li><a href="/products" class="active">T-Shirts</a></li>
+                <li>
+                    <a href="/cart">
+                        🛒 Cart
+                        <span id="cart-count" class="badge">0</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -24,153 +31,355 @@
     <!-- Products Section -->
     <section class="products-section">
         <div class="container">
-            <h2>Our Products</h2>
-            
+
+            <h2>Our Custom T-Shirt Collection</h2>
+
             <!-- Filters -->
             <div class="filters">
+
                 <div class="search-box">
-                    <input type="text" id="search-input" placeholder="Search products..." class="search-input">
-                    <button onclick="searchProducts()" class="btn btn-secondary">Search</button>
+                    <input
+                        type="text"
+                        id="search-input"
+                        placeholder="Search T-Shirts..."
+                        class="search-input">
+
+                    <button
+                        onclick="searchProducts()"
+                        class="btn btn-secondary">
+
+                        Search
+
+                    </button>
                 </div>
-                
+
                 <div class="category-filter">
+
                     <label for="category">Category:</label>
-                    <select id="category" onchange="filterByCategory()">
-                        <option value="All">All Categories</option>
+
+                    <select id="category"
+                            onchange="filterByCategory()">
+
+                        <option value="All">
+                            All Categories
+                        </option>
+
                     </select>
+
                 </div>
+
             </div>
 
             <!-- Products Grid -->
-            <div id="products-grid" class="products-grid"></div>
+            <div id="products-grid"
+                 class="products-grid"></div>
+
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
+
         <div class="container">
+
             <div class="footer-content">
+
                 <div class="footer-section">
+
                     <h3>About Us</h3>
-                    <p>Yadav Store is your trusted online marketplace for quality products.</p>
+
+                    <p>
+                        PRINTiZY provides premium quality
+                        custom printed T-Shirts for every style.
+                    </p>
+
                 </div>
+
                 <div class="footer-section">
+
                     <h3>Quick Links</h3>
+
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/products">Products</a></li>
+                        <li><a href="/products">T-Shirts</a></li>
                         <li><a href="/cart">Cart</a></li>
                     </ul>
+
                 </div>
+
                 <div class="footer-section">
+
                     <h3>Contact</h3>
-                    <p>Email: info@yadavstore.com</p>
-                    <p>Phone: +91-XXXX-XXXX-XXXX</p>
+
+                    <p>Email: support@printizy.com</p>
+                    <p>Phone: +91 9473649700</p>
+
                 </div>
+
             </div>
+
             <div class="footer-bottom">
-                <p>&copy; 2026 Yadav Store. All rights reserved.</p>
+                <p>© 2026 PRINTiZY. All Rights Reserved.</p>
             </div>
+
         </div>
+
     </footer>
 
     <script>
+
         let allProducts = [];
 
-        // Load all products
-        async function loadProducts(category = 'All', search = '') {
+        // Load Products
+
+        async function loadProducts(
+            category = 'All',
+            search = ''
+        ) {
+
             try {
+
                 let url = '/api/products';
+
                 const params = new URLSearchParams();
-                
-                if (category !== 'All') params.append('category', category);
-                if (search) params.append('search', search);
-                
-                if (params.toString()) url += '?' + params.toString();
-                
+
+                if (category !== 'All')
+                    params.append('category', category);
+
+                if (search)
+                    params.append('search', search);
+
+                if (params.toString())
+                    url += '?' + params.toString();
+
                 const response = await fetch(url);
-                const products = await response.json();
+
+                const products =
+                    await response.json();
+
                 allProducts = products;
-                
-                const grid = document.getElementById('products-grid');
-                grid.innerHTML = products.map(product => `
+
+                const grid =
+                    document.getElementById(
+                        'products-grid'
+                    );
+
+                grid.innerHTML = products.map(
+                    product => `
+
                     <div class="product-card">
-                        <img src="${product.image}" alt="${product.name}">
+
+                        <img src="${product.image}"
+                             alt="${product.name}">
+
                         <h3>${product.name}</h3>
-                        <p class="category">${product.category}</p>
-                        <p class="price">₹${product.price.toLocaleString('en-IN')}</p>
-                        <p class="description">${product.description}</p>
-                        <p class="stock">Stock: ${product.stock}</p>
-                        <button class="btn btn-secondary" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Add to Cart</button>
+
+                        <p class="category">
+                            ${product.category}
+                        </p>
+
+                        <p class="price">
+                            ₹${product.price.toLocaleString('en-IN')}
+                        </p>
+
+                        <p class="description">
+                            ${product.description}
+                        </p>
+
+                        <p class="stock">
+                            Available: ${product.stock}
+                        </p>
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="addToCart(
+                                ${product.id},
+                                '${product.name}',
+                                ${product.price}
+                            )">
+
+                            Add To Cart
+
+                        </button>
+
                     </div>
+
                 `).join('');
-                
+
                 if (products.length === 0) {
-                    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No products found</p>';
+
+                    grid.innerHTML = `
+                        <p style="
+                            grid-column:1/-1;
+                            text-align:center;
+                            font-size:20px;
+                            padding:30px;">
+                            No T-Shirts Found
+                        </p>`;
                 }
+
             } catch (error) {
-                console.error('Error loading products:', error);
+
+                console.error(
+                    'Error loading products:',
+                    error
+                );
             }
         }
 
-        // Load categories
+        // Load Categories
+
         async function loadCategories() {
+
             try {
-                const response = await fetch('/api/categories');
-                const categories = await response.json();
-                
-                const select = document.getElementById('category');
-                select.innerHTML = categories.map(cat => 
-                    `<option value="${cat}">${cat}</option>`
+
+                const response =
+                    await fetch('/api/categories');
+
+                const categories =
+                    await response.json();
+
+                const select =
+                    document.getElementById(
+                        'category'
+                    );
+
+                select.innerHTML = `
+                    <option value="All">
+                        All Categories
+                    </option>
+                `;
+
+                select.innerHTML += categories.map(
+                    cat =>
+                    `<option value="${cat}">
+                        ${cat}
+                    </option>`
                 ).join('');
+
             } catch (error) {
-                console.error('Error loading categories:', error);
+
+                console.error(
+                    'Error loading categories:',
+                    error
+                );
             }
         }
 
-        // Filter by category
+        // Filter
+
         function filterByCategory() {
-            const category = document.getElementById('category').value;
-            const search = document.getElementById('search-input').value;
+
+            const category =
+                document.getElementById(
+                    'category'
+                ).value;
+
+            const search =
+                document.getElementById(
+                    'search-input'
+                ).value;
+
             loadProducts(category, search);
         }
 
-        // Search products
+        // Search
+
         function searchProducts() {
-            const search = document.getElementById('search-input').value;
-            const category = document.getElementById('category').value;
+
+            const search =
+                document.getElementById(
+                    'search-input'
+                ).value;
+
+            const category =
+                document.getElementById(
+                    'category'
+                ).value;
+
             loadProducts(category, search);
         }
 
-        // Add to cart
-        function addToCart(productId, productName, price) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            
-            const existingItem = cart.find(item => item.id === productId);
+        // Add To Cart
+
+        function addToCart(
+            productId,
+            productName,
+            price
+        ) {
+
+            let cart =
+                JSON.parse(
+                    localStorage.getItem('cart')
+                ) || [];
+
+            const existingItem =
+                cart.find(
+                    item => item.id === productId
+                );
+
             if (existingItem) {
+
                 existingItem.quantity += 1;
+
             } else {
-                cart.push({ id: productId, name: productName, price: price, quantity: 1 });
+
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: price,
+                    quantity: 1
+                });
             }
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
+
+            localStorage.setItem(
+                'cart',
+                JSON.stringify(cart)
+            );
+
             updateCartCount();
-            alert(productName + ' added to cart!');
+
+            alert(
+                productName +
+                ' added to cart successfully!'
+            );
         }
 
-        // Update cart count
+        // Cart Count
+
         function updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const count = cart.reduce((total, item) => total + item.quantity, 0);
-            document.getElementById('cart-count').textContent = count;
+
+            const cart =
+                JSON.parse(
+                    localStorage.getItem('cart')
+                ) || [];
+
+            const count =
+                cart.reduce(
+                    (total, item) =>
+                    total + item.quantity,
+                    0
+                );
+
+            document.getElementById(
+                'cart-count'
+            ).textContent = count;
         }
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            loadCategories();
-            loadProducts();
-            updateCartCount();
-        });
+
+        document.addEventListener(
+            'DOMContentLoaded',
+            () => {
+
+                loadCategories();
+                loadProducts();
+                updateCartCount();
+
+            }
+        );
+
     </script>
+
 </body>
 </html>
